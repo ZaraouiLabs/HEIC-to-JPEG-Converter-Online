@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEIC to JPG Converter | UtilitySuite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    <style>
+        :root { 
+            --bg-color: #f1f5f9; 
+            --primary: #4f46e5;
+            --success: #059669;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --font-family: 'Outfit', sans-serif;
+        }
+        body { margin: 0; font-family: var(--font-family); background-color: var(--bg-color); color: var(--text); display: flex; min-height: 100vh; }
+
+        .top-accent { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); z-index: 1000; }
+
+        .sidebar { width: 260px; background: white; border-right: 1px solid var(--border); padding: 60px 20px; flex-shrink: 0; }
+        .brand { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.25em; color: #64748b; margin-bottom: 30px; padding-left: 20px; }
+        
+        #tools-sidebar { display: flex; flex-direction: column; }
+        .tool-btn { 
+            display: block; padding: 16px 20px; margin: 2px 0; border-radius: 10px; 
+            text-decoration: none; color: #475569; font-size: 13px; font-weight: 600; 
+            transition: all 0.2s; border-bottom: 1px solid #f8fafc;
+        }
+        .tool-btn:hover { background: #f5f3ff; color: var(--primary); border-bottom-color: #e0e7ff; }
+
+        .main-content { flex: 1; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; }
+        .wrapper { max-width: 800px; width: 100%; }
+
+        h1 { margin: 0 0 40px 0; color: #0f172a; font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; }
+
+        .ad-container { display: flex; justify-content: center; margin: 20px 0; overflow: hidden; }
+        
+        .card { background: white; padding: 32px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        
+        .drop-zone { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 60px 20px; cursor: pointer; transition: 0.3s; text-align: center; background: #f9fafb; margin-bottom: 20px; }
+        .drop-zone:hover { border-color: var(--primary); background: #eef2ff; }
+        
+        .btn-action { width: 100%; padding: 18px; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; background-color: var(--success); color: white; display: none; transition: 0.2s; }
+        .btn-action:hover { filter: brightness(1.1); }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 30px 20px; }
+            .main-content { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-accent"></div>
+
+    <aside class="sidebar">
+        <div class="brand">UtilitySuite</div>
+        <div id="tools-sidebar"></div>
+    </aside>
+
+    <main class="main-content">
+        <div class="wrapper">
+            <h1>HEIC to JPG Converter</h1>
+
+            <div class="ad-container">
+                <script>atOptions = {'key' : 'ea9023c6230a4134ea2bb21d415f3647', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/ea9023c6230a4134ea2bb21d415f3647/invoke.js"></script>
+            </div>
+
+            <div class="card">
+                <div class="drop-zone" id="drop-zone">
+                    <p>Drag & drop your <strong>.heic</strong> file here<br>or <strong>click to upload</strong></p>
+                    <input type="file" id="file-input" hidden accept=".heic">
+                </div>
+                <button id="download-btn" class="btn-action">DOWNLOAD JPG</button>
+            </div>
+
+            <div class="ad-container">
+                <script>atOptions = {'key' : '7cf39fb102b8e5ac06d9ab8ec745e58c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};</script>
+                <script src="https://www.highperformanceformat.com/7cf39fb102b8e5ac06d9ab8ec745e58c/invoke.js"></script>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const downloadBtn = document.getElementById('download-btn');
+        let convertedBlob = null;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+        dropZone.addEventListener('drop', (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); });
+        dropZone.addEventListener('dragover', (e) => e.preventDefault());
+
+        async function handleFile(file) {
+            if (!file) return;
+            try {
+                convertedBlob = await heic2any({ blob: file, toType: "image/jpeg", quality: 0.8 });
+                downloadBtn.style.display = 'block';
+            } catch (err) {
+                alert("Error converting file. Ensure it is a valid HEIC image.");
+            }
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            if (!convertedBlob) return;
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(convertedBlob);
+            link.download = "converted_image.jpg";
+            link.click();
+        });
+
+        const tools = [
+            { name: "QR Generator", url: "https://zaraouilabs.github.io/QR-Code-Generator/" },
+            { name: "Image Compressor", url: "https://zaraouilabs.github.io/Image-Compressor/" },
+            { name: "Date Calculator", url: "https://zaraouilabs.github.io/Date-Calculator/" },
+            { name: "WebP Converter", url: "https://zaraouilabs.github.io/webp-to-jpg-convertor/" },
+            { name: "JSON Formatter", url: "https://zaraouilabs.github.io/JSON-formatter/" },
+            { name: "Word Counter", url: "https://zaraouilabs.github.io/wordcount-pro/" },
+            { name: "Case Converter", url: "https://zaraouilabs.github.io/case-converter/" },
+            { name: "Percentage Calc", url: "https://zaraouilabs.github.io/percentage_counter/" },
+            { name: "Base64 Converter", url: "https://zaraouilabs.github.io/Base64_convertor/" },
+            { name: "Password Generator", url: "https://zaraouilabs.github.io/Password_Generator/" },
+            { name: "Loan Calculator", url: "https://zaraouilabs.github.io/loan-calculator/" }
+        ];
+        document.getElementById('tools-sidebar').innerHTML = tools.map(t => `<a href="${t.url}" class="tool-btn">${t.name}</a>`).join('');
+    </script>
+    <script src="https://pl30403648.effectivecpmnetwork.com/8d/6e/16/8d6e16cf626599011a4b1d03060dc5cf.js"></script>
+</body>
+</html>
