@@ -50,6 +50,17 @@
         .btn-action { width: 100%; padding: 18px; border: none; border-radius: 12px; font-weight: 700; font-size: 16px; cursor: pointer; background-color: var(--success); color: white; display: none; transition: 0.2s; }
         .btn-action:hover { filter: brightness(1.1); }
 
+        /* SEO Content Styles */
+        .info-section { background: white; padding: 32px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); margin-top: 25px; }
+        .info-section h2 { color: #0f172a; font-size: 1.4rem; font-weight: 700; margin-top: 0; margin-bottom: 12px; }
+        .info-section h3 { color: #334155; font-size: 1.1rem; font-weight: 600; margin-top: 20px; margin-bottom: 8px; }
+        .info-section p, .info-section li { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+        .info-section ol { padding-left: 20px; margin: 0; }
+        .info-section ol li { margin-bottom: 8px; }
+        .faq-item { margin-bottom: 16px; }
+        .faq-item:last-child { margin-bottom: 0; }
+        .privacy-badge { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 16px; border-radius: 12px; font-size: 0.9rem; margin-top: 20px; font-weight: 500; }
+
         @media (max-width: 768px) {
             body { flex-direction: column; }
             .sidebar { display: none; }
@@ -95,6 +106,37 @@
                 <script>atOptions = {'key' : '7cf39fb102b8e5ac06d9ab8ec745e58c', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};</script>
                 <script src="https://www.highperformanceformat.com/7cf39fb102b8e5ac06d9ab8ec745e58c/invoke.js"></script>
             </div>
+
+            <!-- SEO Content & About Sections -->
+            <div class="info-section">
+                <h2>About UtilitySuite HEIC to JPG Converter</h2>
+                <p>The UtilitySuite HEIC to JPG Converter allows you to instantly transform High Efficiency Image Format (.heic) files—commonly captured by iPhones and iPads—into standard JPEG format. Convert your photos with high fidelity so they can be easily shared, uploaded, or viewed across all operating systems and platforms.</p>
+
+                <h2>How to Convert HEIC Files to JPG</h2>
+                <ol>
+                    <li><strong>Upload File:</strong> Drag and drop your <code>.heic</code> image directly into the box, or click anywhere inside the box to choose a file from your device.</li>
+                    <li><strong>Process:</strong> The browser automatically converts your HEIC image to a high-quality JPEG in seconds.</li>
+                    <li><strong>Download:</strong> Click the green <strong>"DOWNLOAD JPG"</strong> button to save your newly converted image.</li>
+                </ol>
+
+                <h2>Frequently Asked Questions (FAQ)</h2>
+                <div class="faq-item">
+                    <h3>Why do iPhone photos save as .heic files?</h3>
+                    <p>Apple devices use High Efficiency Image Format (HEIC) to compress photos into smaller file sizes while preserving high image quality. However, many non-Apple websites and older operating systems do not support .heic natively, making JPEG conversion necessary.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Will my photo lose quality during conversion?</h3>
+                    <p>The tool uses optimized compression settings to ensure that the visual quality of your original image is preserved while converting it into a universally supported format.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Are my photos uploaded to a server?</h3>
+                    <p>No. All file processing happens entirely in client-side memory using modern JavaScript (`heic2any`). Your image data never leaves your browser window.</p>
+                </div>
+
+                <div class="privacy-badge">
+                    🔒 <strong>Privacy First Note:</strong> UtilitySuite respects your privacy. Image files are converted directly in your browser and are never uploaded to remote servers.
+                </div>
+            </div>
         </div>
     </main>
 
@@ -127,7 +169,7 @@
             link.click();
         });
 
-       const tools = [
+        const tools = [
             { name: "QR Generator", url: "https://zaraouilabs.github.io/QR-Code-Generator/" },
             { name: "Image Compressor", url: "https://zaraouilabs.github.io/Image-Compressor/" },
             { name: "Date Calculator", url: "https://zaraouilabs.github.io/Date-Calculator/" },
